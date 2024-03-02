@@ -16,7 +16,7 @@ if not os.path.exists('finviz'):
 
 #get ticker list by filtering only above 1 billion dollar company
 DF = pd.read_csv(f'america_2024-03-01.csv')
-tickerlst  = list(DF.query('`Market Capitalization`>300e9').Ticker)
+tickerlst  = list(DF.query('`Market Capitalization`>1e9').Ticker)
 
 #main loop; wait 15 second for every 20 ticker
 dfs = []
@@ -40,5 +40,3 @@ for ticker in tickerlst :
 # Concatenate the DataFrames in the list to create a single DataFrame    
 DFtotal = pd.DataFrame(dfs)
 DFtotal.to_csv(f'finviz/FinViz_{current_datetime}.csv',index=False)
-
-
