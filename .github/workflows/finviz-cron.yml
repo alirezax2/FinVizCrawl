@@ -39,13 +39,17 @@ jobs:
           dataset_name_TradingView_input: ${{ secrets.dataset_name_TradingView_input }}
         run: python pipeline_finviz.py
 
-      # Step 5: Commit and push the generated CSV file if there are changes
+      # Step 5: Get current timestamp     
+      - name: Get current timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      # Step 6: Commit and push the generated CSV file if there are changes
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add finviz/*
-          git commit -a -m "Add csv files"
+          git commit -m "Add CSV files - $TIMESTAMP"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
