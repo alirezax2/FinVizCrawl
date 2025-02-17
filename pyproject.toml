@@ -1,0 +1,11 @@
+[project]
+name = "finvizcrawl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "finvizfinance>=1.1.0",
+    "pandas>=2.2.3",
+    "requests>=2.32.3",
+]
