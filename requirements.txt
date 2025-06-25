@@ -99,7 +99,7 @@ typing-extensions==4.12.2
     #   huggingface-hub
 tzdata==2025.1
     # via pandas
-urllib3==2.3.0
+urllib3==2.5.0
     # via requests
 xxhash==3.5.0
     # via datasets
