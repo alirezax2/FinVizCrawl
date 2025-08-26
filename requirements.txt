@@ -71,7 +71,7 @@ pyarrow==19.0.0
     # via datasets
 python-dateutil==2.9.0.post0
     # via pandas
-python-dotenv==1.0.1
+python-dotenv==1.1.1
     # via finvizcrawl (pyproject.toml)
 pytz==2025.1
     # via pandas
