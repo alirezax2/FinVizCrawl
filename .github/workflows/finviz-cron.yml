@@ -12,8 +12,8 @@ on:
 
 jobs:
   generate-finviz-csv-and-commit:
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    # runs-on: self-hosted
     permissions: # Job-level permissions configuration starts here
       contents: write # 'write' access to repository contents
     steps:
