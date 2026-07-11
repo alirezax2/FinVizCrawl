@@ -36,7 +36,8 @@ DF = load_hf_dataset("america.csv", HF_TOKEN_FINVIZ, dataset_name_TradingView_in
 
 # get ticker list by filtering only above 1 billion dollar company
 # DF = pd.read_csv(f'america_2024-03-01.csv')
-tickerlst  = list(DF.query('`Market Capitalization`>1e9').Ticker)
+# tickerlst  = list(DF.query('`Market Capitalization`>1e9').Ticker)
+tickerlst  = list(DF.query('`market capitalization`>1e9').Ticker) #new column names in tradingview scanner
 
 ##################################################################################################################
 #main loop; wait 15 second for every 20 ticker
