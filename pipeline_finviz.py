@@ -53,7 +53,8 @@ for ticker in tickerlst :
     try:
       stock = finvizfinance(ticker)
       mydict = stock.ticker_fundament()
-      mydict['Ticker'] =ticker
+      # mydict['Ticker'] =ticker
+      mydict['Symbol'] =ticker  #new column names in tradingview scanner
       dfs.append(mydict)
     except:
       print('***ERROR')
