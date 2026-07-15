@@ -19,18 +19,24 @@ jobs:
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Step 2: Setup Python environment
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12" # Install the Python version needed
+          python-version-file: ".python-version"
+          # python-version: "3.12" # Install the Python version needed
 
-      # Step 3: Install dependencies
-      - name: Install python libs
-        run: pip install .
-        # run: pip install -r requirements.txt
+      # Step 3: Install uv and sync dependencies
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked
 
       # Step 4: Execute the Python script to create a CSV
       - name: Generate CSV
@@ -38,7 +44,7 @@ jobs:
           HF_TOKEN_FINVIZ: ${{ secrets.HF_TOKEN_FINVIZ }}
           dataset_name_FinViz_output: ${{ secrets.dataset_name_FinViz_output }}
           dataset_name_TradingView_input: ${{ secrets.dataset_name_TradingView_input }}
-        run: python pipeline_finviz.py
+        run: uv run python pipeline_finviz.py
 
       # Step 5: Get current timestamp     
       - name: Get current timestamp
