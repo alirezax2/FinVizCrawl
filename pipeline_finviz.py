@@ -19,7 +19,7 @@ if not os.path.exists('finviz'):
 
 
 # Load environment variables from .env file
-# load_dotenv()
+load_dotenv()
 
 # Get the name of the HuggingFace dataset for TradingView to read from
 dataset_name_TradingView_input = os.getenv('dataset_name_TradingView_input')
