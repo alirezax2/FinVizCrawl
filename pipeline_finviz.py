@@ -32,8 +32,9 @@ HF_TOKEN_FINVIZ = os.getenv('HF_TOKEN_FINVIZ')
 
 #Load lastest TradingView DataSet from HuggingFace Dataset which is always america.csv
 # download_from_hf_dataset("america.csv", "AmirTrader/TradingViewData", HF_TOKEN_FINVIZ)
-DF = load_hf_dataset("america.csv", HF_TOKEN_FINVIZ, dataset_name_TradingView_input)
-
+# DF = load_hf_dataset("america.csv", HF_TOKEN_FINVIZ, dataset_name_TradingView_input)
+download_from_hf_dataset("america.csv", dataset_name_TradingView_input, HF_TOKEN_FINVIZ, repo_type="dataset")
+DF = pd.read_csv("america.csv")
 # get ticker list by filtering only above 1 billion dollar company
 # DF = pd.read_csv(f'america_2024-03-01.csv')
 # tickerlst  = list(DF.query('`Market Capitalization`>1e9').Ticker)
