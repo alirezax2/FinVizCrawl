@@ -38,7 +38,7 @@ DF = pd.read_csv("america.csv")
 # get ticker list by filtering only above 1 billion dollar company
 # DF = pd.read_csv(f'america_2024-03-01.csv')
 # tickerlst  = list(DF.query('`Market Capitalization`>1e9').Ticker)
-tickerlst  = list(DF.query('`Market capitalization`>1e9').Symbol) #new column names in tradingview scanner
+tickerlst  = list(DF.query('`Market capitalization`>1e8').Symbol) #new column names in tradingview scanner
 
 ##################################################################################################################
 #main loop; wait 15 second for every 20 ticker
