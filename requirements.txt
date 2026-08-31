@@ -87,7 +87,7 @@ requests==2.32.4
     #   huggingface-hub
 six==1.17.0
     # via python-dateutil
-soupsieve==2.6
+soupsieve==2.8
     # via beautifulsoup4
 tqdm==4.67.1
     # via
