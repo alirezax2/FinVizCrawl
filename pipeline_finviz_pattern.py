@@ -151,6 +151,10 @@ def main():
     DFtotal['Pattern_-1_Count'] = (DFtotal[pattern_cols] == -1).sum(axis=1)
     DFtotal['Pattern_Total'] = (DFtotal[pattern_cols] != 0).sum(axis=1)
 
+    # Drop first character of Ticker column
+    if 'Ticker' in DFtotal.columns:
+        DFtotal['Ticker'] = DFtotal['Ticker'].astype(str).str[1:]
+
     # Output file paths
     file_path = fr'finviz/FinViz_Pattern_{current_datetime}.csv'
     latest_file_path = fr'finviz/FinViz_Pattern.csv'
