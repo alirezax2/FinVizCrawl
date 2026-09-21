@@ -1,9 +1,6 @@
 name: finviz Crawling Pipeline
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # Runs at every minute
     # - cron: "*/1 * * * *"
