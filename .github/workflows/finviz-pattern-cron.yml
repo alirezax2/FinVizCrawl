@@ -1,0 +1,53 @@
+name: FinViz Pattern Crawling Pipeline
+
+on:
+  schedule:
+    # Runs Monday to Friday at 23:00 Oslo time (21:00 UTC during CEST / 22:00 UTC during CET)
+    - cron: "0 21 * * 1-5"
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  generate-finviz-pattern-csv-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 'write' access to repository contents
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      # Step 3: Install uv and sync dependencies
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      # Step 4: Execute the Python script to create pattern CSV
+      - name: Generate Pattern CSV
+        env:
+          HF_TOKEN_FINVIZ: ${{ secrets.HF_TOKEN_FINVIZ }}
+          dataset_name_FinViz_output: ${{ secrets.dataset_name_FinViz_output }}
+        run: uv run python pipeline_finviz_pattern.py
+
+      # Step 5: Get current timestamp     
+      - name: Get current timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+
+      # Step 6: Commit and push the generated CSV file if there are changes
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add finviz/*
+          git commit -m "Add FinViz Pattern CSV files - $TIMESTAMP" || echo "No changes to commit"
+          git push
