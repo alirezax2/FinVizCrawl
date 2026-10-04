@@ -5,13 +5,12 @@ on:
     # Runs Monday to Friday at 23:00 Oslo time (21:00 UTC during CEST / 22:00 UTC during CET)
     - cron: "0 21 * * 1-5"
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
-  dispatch:
     inputs:
       run_pipeline:
         description: 'Run the Finviz Pattern Crawling Pipeline'
         required: true
         default: 'true'
-        
+
 jobs:
   generate-finviz-pattern-csv-and-commit:
     runs-on: ubuntu-latest
