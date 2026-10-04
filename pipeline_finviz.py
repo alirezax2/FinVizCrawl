@@ -67,7 +67,8 @@ file_path = fr'finviz/FinViz_{current_datetime}.csv'
 latest_file_path = fr'finviz/FinViz.csv'
 
 DFtotal.to_csv(file_path,index=False)
-DFtotal.to_csv(latest_file_path,index=False)
+if not DFtotal.empty and len(DFtotal.columns) > 0:
+  DFtotal.to_csv(latest_file_path, index=False)
 
 # Upload each file to the dataset
 upload_to_hf_dataset(file_path, dataset_name_FinViz_output, HF_TOKEN_FINVIZ, repo_type="dataset")
